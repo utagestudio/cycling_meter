@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>エアロバイク データ</title>
+</head>
+<body>
+    <h1>エアロバイク データ</h1>
+    
+    <p>スピード: <span id="speed">0.0</span> km/h</p>
+    <p>距離: <span id="distance">0.00</span> km</p>
+    <p>時間: <span id="time">0:00:00</span></p>
+    <p>カロリー: <span id="calories">0.0</span> kcal</p>
+    <p>ケイデンス: <span id="cadence">0.0</span> RPM</p>
+    
+    <p>状態: <span id="status">接続待機中</span></p>
+    <p>最終更新: <span id="last-update">-</span></p>
+
+    <script>
+        function updateData() {
+            fetch('/api/data')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('speed').textContent = data.speed;
+                    document.getElementById('distance').textContent = data.distance;
+                    document.getElementById('time').textContent = data.elapsed_time;
+                    document.getElementById('calories').textContent = data.calories;
+                    document.getElementById('cadence').textContent = data.cadence;
+                    document.getElementById('last-update').textContent = new Date(data.last_update).toLocaleString('ja-JP');
+                    document.getElementById('status').textContent = 'オンライン';
+                })
+                .catch(error => {
+                    document.getElementById('status').textContent = 'エラー';
+                });
+        }
+        
+        // 1秒ごとにデータを更新
+        setInterval(updateData, 1000);
+        
+        // 初回実行
+        updateData();
+    </script>
+</body>
+</html>
