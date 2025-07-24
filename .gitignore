@@ -1,3 +1,4 @@
 Font.ttf
 lib/
-log/
+log/*
+!log/.gitkeep
