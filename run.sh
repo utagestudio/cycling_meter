@@ -1,5 +1,5 @@
 #!/bin/bash
-# cycling_start.sh
+# run.sh
 # エアロバイクシステム起動スクリプト
 
 SCRIPT_DIR="./src"
@@ -24,9 +24,9 @@ echo "ログファイルの初期化..."
 > ${LOG_DIR}/cycling_web.log
 
 # データファイルの存在確認
-if [ -f "./log/cycling_data.json" ]; then
+if [ -f "${LOG_DIR}/cycling_data.json" ]; then
     echo "既存データファイルが見つかりました"
-    echo "内容: $(cat ./log/cycling_data.json | head -1)"
+    echo "内容: $(cat ${LOG_DIR}/cycling_data.json | head -1)"
 else
     echo "新規セッションを開始します"
 fi
@@ -67,11 +67,12 @@ echo "Webサーバー: PID $WEB_PID"
 echo
 echo "アクセス方法:"
 echo "  ローカル: http://localhost:5000"
-echo "  ネットワーク: http://raspberrypi.local:5000"
+#echo "  ネットワーク: http://raspberrypi.local:5000"
 echo
 echo "停止方法:"
-echo "  ./cycling_stop.sh"
-echo "  または Ctrl+C でこのスクリプトを停止"
+#echo "  ./cycling_stop.sh"
+#echo "  または Ctrl+C でこのスクリプトを停止"
+echo "  Ctrl+C でこのスクリプトを停止"
 
 # PIDファイルに保存
 echo "$CALC_PID" > ./cycling_calc.pid
