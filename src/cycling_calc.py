@@ -33,7 +33,7 @@ class CyclingDataCalculator:
         self.calorie_factor = 0.65
 
         # GPIO SETTING
-        self.button_pin = 18
+        self.button_pin = 20
 
         # Variables
         self.num = 0.0
@@ -56,15 +56,15 @@ class CyclingDataCalculator:
         }
 
         # INIT GPIO BUTTON
-        # self.setup_button()
+        self.setup_button()
 
         logging.info("calculation start")
-        #logging.info(f"SWITCH PIN: GPIO{self.button_pin}")
+        logging.info(f"SWITCH PIN: GPIO{self.button_pin}")
 
     def setup_button(self):
         """ Initialize a button used gpiozero """
         try:
-            self.button = Button(self.button_pin, pull_up=True, bounce_time=0.1)
+            self.button = Button(self.button_pin, pull_up=True)
             self.button.when_pressed = self.button_callback
             logging.info(f"Complete setup GPIO{self.button_pin} by gpiozero")
 
@@ -91,7 +91,7 @@ class CyclingDataCalculator:
         current_time = time.time()
 
         if int(current_time) != int(self.last_time):
-            self.simulate_rotation() # for Debug
+            #self.simulate_rotation() # for Debug
 
             # deque
             diff_time = current_time - self.last_time
@@ -217,7 +217,7 @@ class CyclingDataCalculator:
             logging.error(f"Runtime Error: {e}")
         finally:
             logging.info("Finally...")
-            # self.cleanup_button()
+            self.cleanup_button()
 
 def main():
     calculator = CyclingDataCalculator()
