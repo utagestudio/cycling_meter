@@ -16,6 +16,8 @@
     <p>状態: <span id="status">接続待機中</span></p>
     <p>最終更新: <span id="last-update">-</span></p>
 
+    <p><button onclick="resetSession()">リセット</button></p>
+
     <script>
         function updateData() {
             fetch('/api/data')
@@ -33,6 +35,31 @@
                     document.getElementById('status').textContent = 'エラー';
                 });
         }
+
+        function resetSession() {
+            if (confirm('セッションをリセットしますか？')) {
+                fetch('/api/reset', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert('セッションがリセットされました');
+                        // リセット後すぐにデータを更新
+                        updateData();
+                    } else {
+                        alert('リセットに失敗しました: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('リセットエラー:', error);
+                    alert('リセットに失敗しました');
+                });
+            }
+	}
         
         // 1秒ごとにデータを更新
         setInterval(updateData, 1000);
