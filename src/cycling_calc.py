@@ -14,8 +14,8 @@ import random
 from gpiozero import Button
 
 # config
-DATA_FILE = './cycling_data.json'
-LOG_FILE = './cycling_data.log'
+DATA_FILE = '../log/cycling_data.json'
+LOG_FILE = '../log/cycling_calc.log'
 RESET_FILE = './cycling_reset.flag'
 
 logging.basicConfig(

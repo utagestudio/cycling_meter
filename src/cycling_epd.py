@@ -19,8 +19,8 @@ if os.path.exists(libdir):
 from waveshare_epd import epd2in13_V4
 from PIL import Image,ImageDraw,ImageFont
 
-DATA_FILE = './cycling_data.json'
-LOG_FILE = './cycling_data.log'
+DATA_FILE = '../log/cycling_data.json'
+LOG_FILE = '../log/cycling_epd.log'
 
 class CyclingEPDDisplay:
     def __init__(self):

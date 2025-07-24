@@ -4,8 +4,8 @@ import os
 from datetime import datetime
 import logging
 
-DATA_FILE = './cycling_data.json'
-LOG_FILE = './cycling_data.log'
+DATA_FILE = '../log/cycling_data.json'
+LOG_FILE = '../log/cycling_web.log'
 RESET_FILE = './cycling_reset.flag'
 PORT = 5000
 
