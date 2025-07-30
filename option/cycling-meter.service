@@ -1,0 +1,18 @@
+# Please copy to /etc/systemd/system/ and `sudo systemctl daemon-reload`
+[Unit]
+Description=Cycling Meter System
+After=network.target
+Wants=network.target
+
+[Service]
+Type=forking
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/cyclingMeter
+ExecStart=/home/pi/cyclingMeter/run.sh
+ExecStop=/home/pi/cyclingMeter/stop.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
