@@ -15,6 +15,7 @@ echo "既存プロセスのチェック..."
 pkill -f "cycling_calc.py"
 pkill -f "cycling_epd.py" 
 pkill -f "cycling_server.py"
+pkill -f "shutdown_button.py"
 sleep 2
 
 # ログファイルをクリア
@@ -59,11 +60,18 @@ python3 cycling_server.py &
 WEB_PID=$!
 echo "Webサーバー PID: $WEB_PID"
 
+# 4. シャットダウンボタン監視を開始
+echo "シャットダウンボタン監視を開始..."
+python3 shutdown_button.py &
+SHUTDOWN_PID=$!
+echo "シャットダウンボタン PID: $SHUTDOWN_PID"
+
 echo
 echo "=== 起動完了 ==="
 echo "データ計算: PID $CALC_PID"
 echo "電子ペーパー: PID $EPD_PID" 
 echo "Webサーバー: PID $WEB_PID"
+echo "シャットダウンボタン: PID $SHUTDOWN_PID"
 echo
 echo "アクセス方法:"
 echo "  ローカル: http://localhost:5000"
@@ -80,6 +88,7 @@ mkdir -p pid
 echo "$CALC_PID" > ./pid/cycling_calc.pid
 echo "$EPD_PID" > ./pid/cycling_epd.pid
 echo "$WEB_PID" > ./pid/cycling_web.pid
+echo "$SHUTDOWN_PID" > ./pid/shutdown_button.pid
 
 # プロセス監視ループ
 echo
@@ -92,9 +101,11 @@ echo "プロセス監視を開始します..."
 #    kill $CALC_PID 2>/dev/null
 #    kill $EPD_PID 2>/dev/null
 #    kill $WEB_PID 2>/dev/null
+#    kill $SHUTDOWN_PID 2>/dev/null
 #
 #    # PIDファイルを削除
 #    rm -f ./cycling_*.pid
+#    rm -f ./shutdown_button.pid
 #
 #    echo "停止完了"
 #    exit 0
@@ -118,6 +129,11 @@ echo "プロセス監視を開始します..."
 #
 #    if ! kill -0 $WEB_PID 2>/dev/null; then
 #        echo "$(date): Webサーバーが停止しました"
+#        break
+#    fi
+#
+#    if ! kill -0 $SHUTDOWN_PID 2>/dev/null; then
+#        echo "$(date): シャットダウンボタンプログラムが停止しました"
 #        break
 #    fi
 #

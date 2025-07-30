@@ -42,11 +42,23 @@ if [ -f "${PID_DIR}/cycling_web.pid" ]; then
     rm -f ${PID_DIR}/cycling_web.pid
 fi
 
+if [ -f "${PID_DIR}/shutdown_button.pid" ]; then
+    SHUTDOWN_PID=$(cat ${PID_DIR}/shutdown_button.pid)
+    echo "シャットダウンボタンプログラム (PID: $SHUTDOWN_PID) を停止中..."
+    kill $SHUTDOWN_PID 2>/dev/null
+    if kill -0 $SHUTDOWN_PID 2>/dev/null; then
+        sleep 2
+        kill -9 $SHUTDOWN_PID 2>/dev/null
+    fi
+    rm -f ${PID_DIR}/shutdown_button.pid
+fi
+
 # プロセス名で検索して残っているものを停止
 echo "残存プロセスをチェック中..."
 pkill -f "cycling_calc.py"
 pkill -f "cycling_epd.py"
 pkill -f "cycling_server.py"
+pkill -f "shutdown_button.py"
 
 # データファイルの状態を表示
 if [ -f "${LOG_DIR}/cycling_data.json" ]; then
