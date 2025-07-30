@@ -78,9 +78,9 @@ echo "  ローカル: http://localhost:5000"
 #echo "  ネットワーク: http://raspberrypi.local:5000"
 echo
 echo "停止方法:"
-#echo "  ./cycling_stop.sh"
+echo "  ./stop.sh"
 #echo "  または Ctrl+C でこのスクリプトを停止"
-echo "  Ctrl+C でこのスクリプトを停止"
+#echo "  Ctrl+C でこのスクリプトを停止"
 
 # PIDファイルに保存
 cd ..
