@@ -76,9 +76,10 @@ echo "  Ctrl+C でこのスクリプトを停止"
 
 # PIDファイルに保存
 cd ..
-echo "$CALC_PID" > ./cycling_calc.pid
-echo "$EPD_PID" > ./cycling_epd.pid
-echo "$WEB_PID" > ./cycling_web.pid
+mkdir -p pid
+echo "$CALC_PID" > ./pid/cycling_calc.pid
+echo "$EPD_PID" > ./pid/cycling_epd.pid
+echo "$WEB_PID" > ./pid/cycling_web.pid
 
 # プロセス監視ループ
 echo

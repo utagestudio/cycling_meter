@@ -3,12 +3,13 @@
 # エアロバイクシステム停止スクリプト
 
 LOG_DIR="./log"
+PID_DIR="./pid"
 
 echo "=== エアロバイク システム停止 ==="
 echo "時刻: $(date)"
 
 # PIDファイルから各プロセスを停止
-if [ -f "./cycling_calc.pid" ]; then
+if [ -f "${PID_DIR}/cycling_calc.pid" ]; then
     CALC_PID=$(cat ./cycling_calc.pid)
     echo "データ計算プログラム (PID: $CALC_PID) を停止中..."
     kill $CALC_PID 2>/dev/null
@@ -19,26 +20,26 @@ if [ -f "./cycling_calc.pid" ]; then
     rm -f ./cycling_calc.pid
 fi
 
-if [ -f "./cycling_epd.pid" ]; then
-    EPD_PID=$(cat ./cycling_epd.pid)
+if [ -f "${PID_DIR}/cycling_epd.pid" ]; then
+    EPD_PID=$(cat ${PID_DIR}/cycling_epd.pid)
     echo "電子ペーパープログラム (PID: $EPD_PID) を停止中..."
     kill $EPD_PID 2>/dev/null
     if kill -0 $EPD_PID 2>/dev/null; then
         sleep 2
         kill -9 $EPD_PID 2>/dev/null
     fi
-    rm -f ./cycling_epd.pid
+    rm -f ${PID_DIR}/cycling_epd.pid
 fi
 
-if [ -f "./cycling_web.pid" ]; then
-    WEB_PID=$(cat ./cycling_web.pid)
+if [ -f "${PID_DIR}/cycling_web.pid" ]; then
+    WEB_PID=$(cat ${PID_DIR}/cycling_web.pid)
     echo "Webサーバー (PID: $WEB_PID) を停止中..."
     kill $WEB_PID 2>/dev/null
     if kill -0 $WEB_PID 2>/dev/null; then
         sleep 2
         kill -9 $WEB_PID 2>/dev/null
     fi
-    rm -f ./cycling_web.pid
+    rm -f ${PID_DIR}/cycling_web.pid
 fi
 
 # プロセス名で検索して残っているものを停止
