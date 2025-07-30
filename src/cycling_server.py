@@ -16,7 +16,7 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
         logging.FileHandler(LOG_FILE),
-        logging.StreamHandler()  # 画面にも出力
+        # logging.StreamHandler()  # 画面にも出力
     ]
 )
 

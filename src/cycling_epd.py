@@ -35,7 +35,7 @@ class CyclingEPDDisplay:
             format='%(asctime)s - %(levelname)s - %(message)s',
             handlers=[
                 logging.FileHandler(LOG_FILE),
-                logging.StreamHandler()
+                # logging.StreamHandler()
             ]
         )
         logging.info("電子ペーパー表示プログラム開始")
