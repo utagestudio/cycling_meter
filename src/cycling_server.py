@@ -57,7 +57,7 @@ def get_data():
         data['is_fresh'] = time_diff < 10
     except:
         data['data_age'] = 999
-        data['is_fresh'] = Flase
+        data['is_fresh'] = False
 
     return jsonify(data)
 
