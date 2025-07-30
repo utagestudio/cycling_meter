@@ -30,7 +30,7 @@ logging.basicConfig(
 class CyclingDataCalculator:
     def __init__(self):
         self.wheel_circumference = 4.45
-        self.calorie_factor = 0.65
+        self.calorie_factor = 0.065
 
         # GPIO SETTING
         self.button_pin = 20
