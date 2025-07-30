@@ -75,12 +75,9 @@ echo "シャットダウンボタン: PID $SHUTDOWN_PID"
 echo
 echo "アクセス方法:"
 echo "  ローカル: http://localhost:5000"
-#echo "  ネットワーク: http://raspberrypi.local:5000"
 echo
 echo "停止方法:"
 echo "  ./stop.sh"
-#echo "  または Ctrl+C でこのスクリプトを停止"
-#echo "  Ctrl+C でこのスクリプトを停止"
 
 # PIDファイルに保存
 cd ..
@@ -93,53 +90,3 @@ echo "$SHUTDOWN_PID" > ./pid/shutdown_button.pid
 # プロセス監視ループ
 echo
 echo "プロセス監視を開始します..."
-#echo "停止するには Ctrl+C を押してください"
-
-#cleanup() {
-#    echo
-#    echo "システムを停止中..."
-#    kill $CALC_PID 2>/dev/null
-#    kill $EPD_PID 2>/dev/null
-#    kill $WEB_PID 2>/dev/null
-#    kill $SHUTDOWN_PID 2>/dev/null
-#
-#    # PIDファイルを削除
-#    rm -f ./cycling_*.pid
-#    rm -f ./shutdown_button.pid
-#
-#    echo "停止完了"
-#    exit 0
-#}
-
-# シグナルハンドラーを設定
-#trap cleanup SIGINT SIGTERM
-
-# プロセス監視
-#while true; do
-#    # 各プロセスの生存確認
-#    if ! kill -0 $CALC_PID 2>/dev/null; then
-#        echo "$(date): データ計算プログラムが停止しました"
-#        break
-#    fi
-#
-#    if ! kill -0 $EPD_PID 2>/dev/null; then
-#        echo "$(date): 電子ペーパープログラムが停止しました"
-#        break
-#    fi
-#
-#    if ! kill -0 $WEB_PID 2>/dev/null; then
-#        echo "$(date): Webサーバーが停止しました"
-#        break
-#    fi
-#
-#    if ! kill -0 $SHUTDOWN_PID 2>/dev/null; then
-#        echo "$(date): シャットダウンボタンプログラムが停止しました"
-#        break
-#    fi
-#
-#    # 10秒間隔でチェック
-#    sleep 10
-#done
-
-#echo "プロセス監視を終了します"
-#cleanup
