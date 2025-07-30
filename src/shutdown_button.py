@@ -2,7 +2,7 @@ from gpiozero import Button
 from subprocess import call
 import logging
 
-LOG_FILE = './log/shutdown.log'
+LOG_FILE = '../log/shutdown.log'
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
