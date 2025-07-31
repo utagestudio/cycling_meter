@@ -1,5 +1,6 @@
 # Project specific
 Font.ttf
+Font_bold.ttf
 lib/
 log/*
 !log/.gitkeep
