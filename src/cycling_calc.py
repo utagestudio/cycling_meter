@@ -197,6 +197,7 @@ class CyclingDataCalculator:
                 with open(DATA_FILE, 'r') as f:
                     existing_data = json.load(f)
                     self.num = existing_data.get('num', 0.0)
+                    self.last_num = self.num
                     logging.info(f"Existing Data Loaded: num={self.num}")
 
         except Exception as e:
