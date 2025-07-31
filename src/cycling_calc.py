@@ -42,8 +42,8 @@ class CyclingDataCalculator:
         self.last_time = self.start_time
 
         # deque
-        self.time_queue = deque([0] * 10, maxlen=10)
-        self.num_queue = deque([0] * 10, maxlen=10)
+        self.time_queue = deque([0.0] * 10, maxlen=10)
+        self.num_queue = deque([0.0] * 10, maxlen=10)
 
         self.data = {
             'speed': 0.0,
