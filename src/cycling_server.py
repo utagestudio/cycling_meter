@@ -37,7 +37,7 @@ def load_cycling_data():
         'calories': 0.0,
         'cadence': 0.0,
         'num': 0.0,
-        'last_update': datatime.now().isoformat()
+        'last_update': datetime.now().isoformat()
     }
 
 @app.route('/')
