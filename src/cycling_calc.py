@@ -34,6 +34,7 @@ class CyclingDataCalculator:
 
         # GPIO SETTING
         self.cadence_pin = 20
+        self.reset_pin = 5
 
         # Variables
         self.num = 0.0
@@ -62,7 +63,7 @@ class CyclingDataCalculator:
         logging.info(f"SWITCH PIN: GPIO{self.cadence_pin}")
 
     def setup_cadence_counter(self):
-        """ Initialize a button used gpiozero """
+        """ Initialize a cadence button used gpiozero """
         try:
             self.button = Button(self.cadence_pin, pull_up=True)
             self.button.when_pressed = self.button_callback
@@ -71,6 +72,17 @@ class CyclingDataCalculator:
         except Exception as e:
             logging.error(f"Button Error: {e}")
             self.button = None
+
+    def setup_reset_button(self):
+        """ Initialize a reset button used gpiozero """
+        try:
+            self.reset_button = Button(self.reset_pin, pull_up=True, bounce_time=1)
+            self.reset_button.when_pressed = self.reset_session
+            logging.info(f"Complete setup GPIO{self.reset_pin} by gpiozero")
+
+        except Exception as e:
+            logging.error(f"Button Error: {e}")
+            self.reset_button = None
 
     def button_callback(self):
         """ The function if a switch is pressed """
