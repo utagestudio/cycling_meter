@@ -58,6 +58,7 @@ class CyclingDataCalculator:
 
         # INIT GPIO BUTTON
         self.setup_cadence_counter()
+        self.setup_reset_button()
 
         logging.info("calculation start")
         logging.info(f"SWITCH PIN: GPIO{self.cadence_pin}")
