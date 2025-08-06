@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, send_from_directory
 import json
 import os
 from datetime import datetime
@@ -43,6 +43,9 @@ def load_cycling_data():
         'last_update': datetime.now().isoformat()
     }
 
+@app.route('/fonts/<path:filename>')
+def serve_fonts(filename):
+    return send_from_directory('./pic', filename)
 @app.route('/')
 def index():
     """ main page """

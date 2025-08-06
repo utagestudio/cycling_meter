@@ -1,10 +1,12 @@
 @font-face {
   font-family: 'Font';
-  src: url('../src/pic/Font.ttf') format('truetype');
+  src: url('/fonts/Font.ttf') format('truetype');
+  font-weight: normal;
 }
 @font-face {
-  font-family: 'Font_bold';
-  src: url('../src/pic/Font_bold.ttf') format('truetype');
+  font-family: 'Font';
+  src: url('/fonts/Font_bold.ttf') format('truetype');
+  font-weight: bold;
 }
 
 :root{
@@ -61,7 +63,7 @@ html, body {
       background-color: black;
       color: white;
       line-height: 1;
-      font-family: 'Font_bold', sans-serif;
+      font-weight: bold;
       display: flex;
       justify-content: center;
       align-items: center;
