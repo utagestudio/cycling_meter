@@ -1,71 +1,86 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <title>エアロバイク データ</title>
+  <meta charset="UTF-8">
+  <title>エアロバイク データ</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+  </style>
+
 </head>
 <body>
-    <h1>エアロバイク データ</h1>
-    
-    <p>スピード: <span id="speed">0.0</span> km/h</p>
-    <p>距離: <span id="distance">0.00</span> km</p>
-    <p>時間: <span id="time">0:00:00</span></p>
-    <p>カロリー: <span id="calories">0.0</span> kcal</p>
-    <p>ケイデンス: <span id="cadence">0.0</span> RPM</p>
-    
-    <p>状態: <span id="status">接続待機中</span></p>
-    <p>最終更新: <span id="last-update">-</span></p>
+<div class="wrap">
+  <div class="frame">
+    <div class="name">UTAGE.GAMES</div>
+    <div class="rows distance"><h1 class="label">距離</h1><strong id="distance" class="value bold">000.0</strong><p class="unit">km</p></div>
+    <div class="rows speed"><h1 class="label">スピード</h1><strong id="speed" class="value bold">00.0</strong><p class="unit">km/h</p></div>
+    <div class="rows time"><h1 class="label">時間</h1><strong id="time" class="value bold">00:00:00</strong></div>
+    <div class="rows calories"><h1 class="label">消費カロリー</h1><strong id="calories" class="value bold">0000.0</strong><p class="unit">kcal</p></div>
+    <div class="cadence"><h1 class="label">ケイデンス</h1><strong id="cadence" class="value bold">000.0</strong><p class="unit"> RPM</p>
+      <div class="graph">
+        <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="31" stroke="black" stroke-width="1" fill="transparent" /><circle r="0" class="circle" /></svg>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <p><button onclick="resetSession()">リセット</button></p>
+<div class="a">
 
-    <script>
-        function updateData() {
-            fetch('/api/data')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('speed').textContent = data.speed;
-                    document.getElementById('distance').textContent = data.distance;
-                    document.getElementById('time').textContent = data.elapsed_time;
-                    document.getElementById('calories').textContent = data.calories;
-                    document.getElementById('cadence').textContent = data.cadence;
-                    document.getElementById('last-update').textContent = new Date(data.last_update).toLocaleString('ja-JP');
-                    document.getElementById('status').textContent = 'オンライン';
-                })
-                .catch(error => {
-                    document.getElementById('status').textContent = 'エラー';
-                });
+  <p>状態: <span id="status">接続待機中</span></p>
+  <p>最終更新: <span id="last-update">-</span></p>
+  <p><button onclick="resetSession()">リセット</button></p>
+
+</div>
+
+
+<script>
+  function updateData() {
+    fetch('/api/data')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('speed').textContent = data.speed;
+        document.getElementById('distance').textContent = data.distance;
+        document.getElementById('time').textContent = data.elapsed_time;
+        document.getElementById('calories').textContent = data.calories;
+        document.getElementById('cadence').textContent = data.cadence;
+        document.getElementById('last-update').textContent = new Date(data.last_update).toLocaleString('ja-JP');
+        document.getElementById('status').textContent = 'オンライン';
+      })
+      .catch(error => {
+        document.getElementById('status').textContent = 'エラー';
+      });
+  }
+
+  function resetSession() {
+    if (confirm('セッションをリセットしますか？')) {
+      fetch('/api/reset', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         }
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            alert('セッションがリセットされました');
+            // リセット後すぐにデータを更新
+            updateData();
+          } else {
+            alert('リセットに失敗しました: ' + data.message);
+          }
+        })
+        .catch(error => {
+          console.error('リセットエラー:', error);
+          alert('リセットに失敗しました');
+        });
+    }
+  }
 
-        function resetSession() {
-            if (confirm('セッションをリセットしますか？')) {
-                fetch('/api/reset', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        alert('セッションがリセットされました');
-                        // リセット後すぐにデータを更新
-                        updateData();
-                    } else {
-                        alert('リセットに失敗しました: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('リセットエラー:', error);
-                    alert('リセットに失敗しました');
-                });
-            }
-	}
-        
-        // 1秒ごとにデータを更新
-        setInterval(updateData, 1000);
-        
-        // 初回実行
-        updateData();
-    </script>
+  // 1秒ごとにデータを更新
+  setInterval(updateData, 1000);
+
+  // 初回実行
+  updateData();
+</script>
 </body>
 </html>
