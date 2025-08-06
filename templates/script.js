@@ -4,7 +4,7 @@ function updateData() {
     .then(response => response.json())
     .then(data => {
       document.getElementById('speed').textContent = data.speed.toFixed(1);
-      document.getElementById('distance').textContent = data.distance.toFixed(1);
+      document.getElementById('distance').textContent = data.distance.toFixed(2);
       document.getElementById('time').textContent = data.elapsed_time;
       document.getElementById('calories').textContent = data.calories.toFixed(1);
       document.getElementById('last-update').textContent = new Date(data.last_update).toLocaleString('ja-JP');
