@@ -3,10 +3,10 @@ function updateData() {
   fetch('/api/data')
     .then(response => response.json())
     .then(data => {
-      document.getElementById('speed').textContent = data.speed;
-      document.getElementById('distance').textContent = data.distance;
+      document.getElementById('speed').textContent = data.speed.toFixed(1);
+      document.getElementById('distance').textContent = data.distance.toFixed(1);
       document.getElementById('time').textContent = data.elapsed_time;
-      document.getElementById('calories').textContent = data.calories;
+      document.getElementById('calories').textContent = data.calories.toFixed(1);
       document.getElementById('last-update').textContent = new Date(data.last_update).toLocaleString('ja-JP');
       document.getElementById('status').textContent = 'オンライン';
 

@@ -40,7 +40,7 @@ html, body {
       display: flex;
       line-height: 1;
       align-items: center;
-      gap: 0 5px;
+      gap: 0 4px;
     }
     .label{
       font-weight: 400;
@@ -49,6 +49,7 @@ html, body {
     }
     .value {
       font-weight: bold;
+      text-align: right;
     }
     .unit {
       line-height: 1;
@@ -57,6 +58,9 @@ html, body {
 
     .distance{
       grid-area: distance;
+      .value {
+        width: 5ex;
+      }
     }
     .name{
       grid-area: name;
@@ -128,6 +132,7 @@ html, body {
       .value{
         font-size: 40px;
         align-self: baseline;
+        width: 5ex;
       }
       .unit{
         align-self: baseline;
@@ -136,6 +141,9 @@ html, body {
     }
     .speed{
       grid-area: speed;
+      .value {
+        width: 4ex;
+      }
     }
     .time{
       grid-area: time;
