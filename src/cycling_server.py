@@ -9,7 +9,10 @@ LOG_FILE = '../log/cycling_web.log'
 RESET_FILE = './cycling_reset.flag'
 PORT = 5000
 
-app = Flask(__name__, template_folder='../templates')
+app = Flask(__name__,
+            template_folder='../templates',
+            static_folder='../templates',
+            static_url_path='/static')
 
 logging.basicConfig(
     level=logging.INFO,
