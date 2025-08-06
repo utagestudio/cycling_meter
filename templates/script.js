@@ -11,9 +11,9 @@ function updateData() {
       document.getElementById('status').textContent = 'オンライン';
 
       //cadence
-      document.getElementById('cadence').textContent = data.cadence;
+      document.getElementById('cadence').textContent = parseInt(data.cadence).toFixed(1);
       const cadence_rate = data.cadence / 120 * 100;
-      document.documentElement.style.setProperty('--cadence-rate', `${Math.min(cadence_rate, 100)}`);
+        document.documentElement.style.setProperty('--cadence-rate', `${Math.min(cadence_rate, 100)}`);
     })
     .catch(error => {
       document.getElementById('status').textContent = 'エラー';

@@ -94,6 +94,9 @@ html, body {
         place-items: center;
         padding: 4px;
         border: 1px solid black;
+        box-sizing: border-box;
+        width: 40px;
+        justify-content: end;
       }
       .unit{
         display: none;
