@@ -4,9 +4,6 @@
   <meta charset="UTF-8">
   <title>エアロバイク データ</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-  </style>
-
 </head>
 <body>
 <div class="wrap">
@@ -42,9 +39,13 @@
         document.getElementById('distance').textContent = data.distance;
         document.getElementById('time').textContent = data.elapsed_time;
         document.getElementById('calories').textContent = data.calories;
-        document.getElementById('cadence').textContent = data.cadence;
         document.getElementById('last-update').textContent = new Date(data.last_update).toLocaleString('ja-JP');
         document.getElementById('status').textContent = 'オンライン';
+
+        //cadence
+        document.getElementById('cadence').textContent = data.cadence;
+        const cadence_rate = data.cadence / 120 * 100;
+        document.documentElement.style.setProperty('--cadence-rate', `${Math.min(cadence_rate, 100)}`);
       })
       .catch(error => {
         document.getElementById('status').textContent = 'エラー';
